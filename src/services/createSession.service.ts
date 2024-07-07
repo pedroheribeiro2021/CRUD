@@ -16,14 +16,12 @@ export const createSessionService = async ({
   });
 
   if (!user) {
-    // Lançar um erro apropriado
     throw new Error("Usuário e/ou senha inválidos");
   }
 
   const passwordMatch = await compare(password, user.password);
 
   if (!passwordMatch) {
-    // Lançar um erro apropriado
     throw new Error("Usuário e/ou senha inválidos");
   }
 
