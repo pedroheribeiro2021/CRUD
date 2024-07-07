@@ -9,11 +9,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createSessionController = void 0;
-const createSession_service_1 = require("../../services/createSession.service");
-const createSessionController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const sessionData = req.body;
-    const token = yield (0, createSession_service_1.createSessionService)(sessionData);
-    return res.json(token);
+exports.deleteUserService = void 0;
+const data_source_1 = require("../data-source");
+const users_entity_1 = require("../entities/users.entity");
+const deleteUserService = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const userRepository = data_source_1.AppDataSource.getRepository(users_entity_1.User);
+    const user = yield userRepository.findOne({
+        where: {
+            id: id,
+        },
+    });
+    yield userRepository.remove(user);
 });
-exports.createSessionController = createSessionController;
+exports.deleteUserService = deleteUserService;

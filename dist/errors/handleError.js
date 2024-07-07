@@ -9,11 +9,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createSessionController = void 0;
-const createSession_service_1 = require("../../services/createSession.service");
-const createSessionController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const sessionData = req.body;
-    const token = yield (0, createSession_service_1.createSessionService)(sessionData);
-    return res.json(token);
+exports.handleError = void 0;
+const AppError_1 = require("./AppError");
+const handleError = (error, req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    if (error instanceof AppError_1.AppError) {
+        console.log(error);
+        return res.status(error.statusCode).json({
+            message: error.message,
+        });
+    }
+    console.log(error);
+    return res.status(500).json({
+        message: "Internal server error",
+    });
 });
-exports.createSessionController = createSessionController;
+exports.handleError = handleError;

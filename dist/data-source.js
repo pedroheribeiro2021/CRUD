@@ -6,16 +6,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppDataSource = void 0;
 require("dotenv/config");
 require("reflect-metadata");
-var typeorm_1 = require("typeorm");
-var path_1 = __importDefault(require("path"));
-var dataSourceConfig = function () {
-    var entitiesPath = path_1.default.join(__dirname, './entities/**.{ts,js}');
-    var migrationsPath = path_1.default.join(__dirname, './migrations/**.{ts,js}');
-    var dbUrl = process.env.DATABASE_URL;
+const typeorm_1 = require("typeorm");
+const path_1 = __importDefault(require("path"));
+const dataSourceConfig = () => {
+    const entitiesPath = path_1.default.join(__dirname, './entities/**.{ts,js}');
+    const migrationsPath = path_1.default.join(__dirname, './migrations/**.{ts,js}');
+    const dbUrl = process.env.DATABASE_URL;
     if (!dbUrl) {
         throw new Error('Env var DATABASE_URL does not exists');
     }
-    var nodeEnv = process.env.NODE_ENV;
+    const nodeEnv = process.env.NODE_ENV;
     if (nodeEnv === 'test') {
         return {
             type: 'sqlite',
